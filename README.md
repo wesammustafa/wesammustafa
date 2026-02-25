@@ -46,7 +46,7 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
 
   <div align="center">
     <a href="https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know">
-      <img src="https://api.star-history.com/svg?repos=wesammustafa/Claude-Code-Everything-You-Need-to-Know&type=date&legend=top-left&theme=dark" alt="Star History Chart" width="90%" />
+      <img src="https://api.star-history.com/svg?repos=wesammustafa/Claude-Code-Everything-You-Need-to-Know&type=date&legend=top-left&theme=dark" alt="Star History Chart" width="60%" />
     </a>
   </div>
 
