@@ -14,7 +14,7 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
   
   #### 📫 Connect with me
   
-  [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" width="3.5%" alt="LinkedIn" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" width="3.5%" alt="X (Twitter)" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" width="3.5%" alt="YouTube" />](https://www.youtube.com/@frameworklabs)
+  [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" width="3.5%" alt="LinkedIn" style="filter: invert(0.9) brightness(1.5);" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" width="3.5%" alt="X (Twitter)" style="filter: invert(0.9) brightness(1.5);" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" width="3.5%" alt="YouTube" style="filter: invert(0.9) brightness(1.5);" />](https://www.youtube.com/@frameworklabs)
   
   #### 🛠️ Technologies
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="JavaScript"></code>
