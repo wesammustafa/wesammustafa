@@ -61,16 +61,12 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
     Each episode explores frameworks like **Strategic Learning Engineering**, **Metacognitive Debugging**, and **Cognitive Architecture Design** to optimize how engineers think and work.  
     [Listen & rewire your engineering mind →](https://www.youtube.com/playlist?list=PLK8BhQ11gUgsKMA1PASwMIOOMOZlxozcD)
  
-  ---
-  
-  #### 📸 Gallery
-  
-  <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
-    <img src="assets/image1.jpg" alt="Image 1" width="200" height="auto" style="border-radius: 10px;" />
-    <img src="assets/image2.png" alt="Image 2" width="200" height="auto" style="border-radius: 10px;" />
-    <img src="assets/image3.jpg" alt="Image 3" width="200" height="auto" style="border-radius: 10px;" />
-    <img src="assets/image4.png" alt="Image 4" width="200" height="auto" style="border-radius: 10px;" />
+   <div align="center" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px;">
+    <img src="assets/channel.png" alt="channel" width="600" height="auto" style="border-radius: 10px;" />
+    <img src="assets/podcast.png" alt="podcast" width="200" height="auto" style="border-radius: 10px;" />
   </div>
+
+  ---
   
   <div align="center" style="margin-top: 30px;">
   
