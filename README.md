@@ -1,4 +1,4 @@
-  ### Hello! I'm Wesam Abousaid 👋
+# Hello! I'm Wesam Abousaid 👋
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTduN2prM3dxaTgzM2ptdzVxYWliaHhqeXVzcnZzamh2NWZmNGU1OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ws6T5PN7wHv3cY8xy8/giphy.gif" alt="side Image" align="right" width="200" height="auto" />
 
@@ -9,7 +9,7 @@
 - [Open Source](#open-source)
 - [My Content](#my-content)
 
-## About Me
+## About Me {#about-me}
 
 **Software Engineer** based in **Madrid, Spain** specializing in **Product & Platform Engineering**, **Distributed Systems (AWS)**, and **AI‑Enabled Systems**.
 
@@ -21,11 +21,11 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
   - 🤝 **Pronouns:** He / Him
   - 😄 **Fun fact:** Some people read thrillers; I read psychology and behavioral economics.
   
-  ## 📫 Connect with me
+  ## 📫 Connect with me {#connect}
   
   [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" width="3.5%" alt="LinkedIn" style="filter: invert(1) brightness(2);" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" width="3.5%" alt="X (Twitter)" style="filter: invert(1) brightness(2);" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" width="3.5%" alt="YouTube" style="filter: invert(1) brightness(2);" />](https://www.youtube.com/@frameworklabs)
   
-  ## 🛠️ Technologies
+  ## 🛠️ Technologies {#technologies}
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/javascript/javascript.png" alt="JavaScript"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/typescript/typescript.png" alt="TypeScript"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/java/java.png" alt="Java"></code>
@@ -49,7 +49,7 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
   <code><img height="40" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/rabbitmq.svg" alt="RabbitMQ" style="filter: invert(1) brightness(2);"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" alt="Git"></code>
 
-  ## 💻 Open Source
+  ## 💻 Open Source {#open-source}
 
   **Claude‑Code‑Everything‑You‑Need‑to‑Know** the ultimate all‑in‑one guide to mastering Claude Code
 
@@ -64,7 +64,7 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
   - 🌍 **Community Impact:** Used globally for mastering AI‑assisted coding
   - 📚 **Comprehensive Coverage:** From basics to advanced workflows (MCP, hooks, agent teams)
 
-  ## 🎙️ My Content
+  ## 🎙️ My Content {#my-content}
 
   - **Beyond Tech Podcast** – Bridging **cognitive science** and **software engineering** through **meta‑engineering**.  
     Each episode explores frameworks like **Strategic Learning Engineering**, **Metacognitive Debugging**, and **Cognitive Architecture Design** to optimize how engineers think and work.  
