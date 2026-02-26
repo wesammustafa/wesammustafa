@@ -16,7 +16,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   
   ## 📫 Connect with me
   
-  [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg" width="4.5%" alt="LinkedIn" style="filter: brightness(1.5) invert(1);" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg" width="4.5%" alt="X (Twitter)" style="filter: brightness(1.5) invert(1);" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg" width="4.5%" alt="YouTube" style="filter: brightness(1.5) invert(1);" />](https://www.youtube.com/@frameworklabs)
+  [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="4.5%" alt="LinkedIn" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://raw.githubusercontent.com/github/explore/main/topics/twitter/twitter.png" width="4.5%" alt="X (Twitter)" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="https://raw.githubusercontent.com/github/explore/main/topics/youtube/youtube.png" width="4.5%" alt="YouTube" />](https://www.youtube.com/@frameworklabs)
   
   ## 🛠️ Technologies
   
@@ -33,15 +33,15 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/mongodb/mongodb.png" alt="MongoDB"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/redis/redis.png" alt="Redis"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/postgresql/postgresql.png" alt="PostgreSQL"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/elasticsearch.svg" alt="Elasticsearch" style="filter: brightness(1.5) invert(1);"></code>
+  <code><img height="40" src="https://raw.githubusercontent.com/github/explore/main/topics/elasticsearch/elasticsearch.png" alt="Elasticsearch"></code>
   
   **Cloud & Infrastructure**<br/>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/aws/aws.png" alt="AWS"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/azure/azure.png" alt="Azure"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/docker/docker.png" alt="Docker"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/kubernetes/kubernetes.png" alt="Kubernetes"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/apachekafka.svg" alt="Kafka" style="filter: brightness(1.5) invert(1);"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/rabbitmq.svg" alt="RabbitMQ" style="filter: brightness(1.5) invert(1);"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" alt="Kafka"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg" alt="RabbitMQ"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" alt="Git"></code>
 
   ## 💻 Open Source
