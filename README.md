@@ -9,7 +9,7 @@ I build scalable, production‑grade platforms across **E‑Commerce, PropTech, 
 My work focuses on designing distributed, integration‑heavy systems and data workflows that tie architecture decisions directly to business outcomes. This includes launching greenfield products, scaling high‑traffic platforms, and modernizing monoliths into resilient microservices.
 
   - 🔭 **Currently:** Senior Software Engineer at Huspy
-  - 🌱 **Learning:** AI‑Enabled Systems & Distributed Systems patterns
+  - 🌱 **Exploring:** LLM-powered workflow orchestration & planner–executor architectures in distributed systems
   - 💬 **Ask me about:** System Design, Meta‑Cognitive Engineering, Platform Architecture
   - 🤝 **Pronouns:** He / Him
   - 😄 **Fun fact:** Some people read thrillers; I read psychology and behavioral economics.
