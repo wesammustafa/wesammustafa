@@ -12,7 +12,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   - 🌱 **Exploring:** LLM-powered workflow orchestration & planner–executor architectures in distributed systems
   - 💬 **Ask me about:** System Design, Meta‑Cognitive Engineering, Platform Architecture
   - 🤝 **Pronouns:** He / Him
-  - 😄 **Fun fact:** Some people read thrillers; I read psychology and behavioral economics.
+  - 😄 **Fun fact:** Some people read thrillers; I read psychology and behavioral economics
   
   ## 📫 Connect with me
   
