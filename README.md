@@ -44,7 +44,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   <code><img height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg" alt="RabbitMQ"></code>
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" alt="Git"></code>
 
-  ## 💻 Open Source
+  ## 💻 Contributions
 
   **Claude‑Code‑Everything‑You‑Need‑to‑Know** the ultimate all‑in‑one guide to mastering Claude Code
 
@@ -54,10 +54,27 @@ My work focuses on designing distributed, integration‑heavy systems and data w
     </a>
   </div>
 
-  - 📈 **Rapid Growth:** Among the top 1% most‑starred Claude‑related guides
+  - 📈 **Rapid Growth:** ⭐ One of the most starred community guides for Claude Code on GitHub
   - 🔄 **Actively Maintained:** Regular updates with latest Claude Code features (2026)
   - 🌍 **Community Impact:** Used globally for mastering AI‑assisted coding
   - 📚 **Comprehensive Coverage:** From basics to advanced workflows (MCP, hooks, agent teams)
+
+  [Master Claude Code →](https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know)
+
+  **OpenCode‑Everything‑You‑Need‑to‑Know** - The comprehensive guide to open‑source AI coding
+
+  <div align="center">
+    <a href="https://github.com/wesammustafa/OpenCode-Everything-You-Need-to-Know">
+      <img src="https://raw.githubusercontent.com/wesammustafa/OpenCode-Everything-You-Need-to-Know/main/Images/opencode.png" alt="OpenCode Logo" width="60%" />
+    </a>
+  </div>
+
+  - 🆓 **Open‑source & vendor freedom:** No lock‑in, use any AI model (OpenAI, Anthropic, DeepSeek, etc.)
+  - ⌨️ **Terminal‑first workflow:** Designed for developers who live in the terminal
+  - 🔧 **Extensible architecture:** Create custom skills, agents, and workflows
+  - 🤝 **Active community:** Growing ecosystem with Discord support and comprehensive docs
+
+  [Break free from vendor lock‑in →](https://github.com/wesammustafa/OpenCode-Everything-You-Need-to-Know)
 
   ## 🎙️ My Content
 
