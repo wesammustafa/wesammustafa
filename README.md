@@ -65,7 +65,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   <div align="center">
     <a href="https://github.com/wesammustafa/OpenCode-Everything-You-Need-to-Know">
-      <img src="https://raw.githubusercontent.com/wesammustafa/OpenCode-Everything-You-Need-to-Know/main/Images/opencode.png" alt="OpenCode Logo" width="60%" />
+      <img src="https://api.star-history.com/svg?repos=wesammustafa/OpenCode-Everything-You-Need-to-Know&type=date&legend=top-left&theme=dark" alt="Star History Chart" width="60%" />
     </a>
   </div>
 
