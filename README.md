@@ -2,7 +2,7 @@
 
 <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTduN2prM3dxaTgzM2ptdzVxYWliaHhqeXVzcnZzamh2NWZmNGU1OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ws6T5PN7wHv3cY8xy8/giphy.gif" alt="side Image" align="right" width="200" height="auto" />
 
-**Software Engineer** based in **Madrid, Spain** specializing in **Product & Platform Engineering**, **Distributed Systems (AWS)**, and **AI‑Enabled Systems**.
+**Software Engineer** | **AI Engineer** based in **Madrid, Spain** specializing in **Product & Platform Engineering**, **Distributed Systems (AWS)**, and **AI‑Enabled Systems**.
 
 I build scalable, production‑grade platforms across **E‑Commerce, PropTech, SaaS/CRM, and Cloud‑Native ecosystems**. My primary stack includes **Node.js** and **TypeScript**, with strong experience in **Java (Spring Boot)**.
 
