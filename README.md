@@ -45,15 +45,15 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   <code><img height="40" src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics/git/git.png" alt="Git"></code>
 
   **AI &amp; Agentic Engineering**<br/>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/langchain-color.svg" alt="LangChain"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/langgraph-color.svg" alt="LangGraph"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/crewai-color.svg" alt="CrewAI"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/mcp.svg" alt="MCP"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/openai.svg" alt="OpenAI"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/claude-color.svg" alt="Claude"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/ollama.svg" alt="Ollama"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/langchain-color.png" alt="LangChain"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/langgraph.png" alt="LangGraph"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/crewai-color.png" alt="CrewAI"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/mcp.png" alt="MCP"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/openai.png" alt="OpenAI"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/claude-color.png" alt="Claude"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/ollama.png" alt="Ollama"></code>
   <code><img height="40" src="https://cdn.simpleicons.org/qdrant" alt="Qdrant"></code>
-  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@latest/icons/huggingface-color.svg" alt="Hugging Face"></code>
+  <code><img height="40" src="https://cdn.jsdelivr.net/npm/@lobehub/icons-static-png@latest/dark/huggingface-color.png" alt="Hugging Face"></code>
 
   ## 💻 Contributions
 
