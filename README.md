@@ -16,7 +16,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   
   ## 📫 Connect with me
   
-  [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="4.5%" alt="LinkedIn" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://raw.githubusercontent.com/github/explore/main/topics/twitter/twitter.png" width="4.5%" alt="X (Twitter)" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="https://raw.githubusercontent.com/github/explore/main/topics/youtube/youtube.png" width="4.5%" alt="YouTube" />](https://www.youtube.com/@frameworklabs)
+  [<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="4.5%" alt="LinkedIn" />](https://www.linkedin.com/in/wesammustafa)  &nbsp; [<img src="https://raw.githubusercontent.com/github/explore/main/topics/twitter/twitter.png" width="4.5%" alt="X (Twitter)" />](https://x.com/WesamMustafa100)  &nbsp; [<img src="assets/youtube.png" width="4.5%" alt="YouTube" />](https://www.youtube.com/@frameworklabs)
   
   ## 🛠️ Technologies
   
