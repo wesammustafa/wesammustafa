@@ -62,7 +62,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   <div align="center">
     <a href="https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know">
-      <img src="https://api.star-history.com/svg?repos=wesammustafa/Claude-Code-Everything-You-Need-to-Know&type=date&legend=top-left&theme=dark" alt="Star History Chart" width="60%" />
+      <img src="assets/star-history-claude-code.svg" alt="Star History Chart" width="60%" />
     </a>
   </div>
 
@@ -73,11 +73,11 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   [Master Claude Code →](https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know)
 
-  **OpenCode‑Everything‑You‑Need‑to‑Know** - The comprehensive guide to open‑source AI coding
+  **opencode‑primer** - The comprehensive guide to open‑source AI coding
 
   <div align="center">
-    <a href="https://github.com/wesammustafa/OpenCode-Everything-You-Need-to-Know">
-      <img src="https://api.star-history.com/svg?repos=wesammustafa/OpenCode-Everything-You-Need-to-Know&type=date&legend=top-left&theme=dark" alt="Star History Chart" width="60%" />
+    <a href="https://github.com/wesammustafa/opencode-primer">
+      <img src="assets/star-history-opencode-primer.svg" alt="Star History Chart" width="60%" />
     </a>
   </div>
 
@@ -86,7 +86,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   - 🔧 **Extensible architecture:** Create custom skills, agents, and workflows
   - 🤝 **Active community:** Growing ecosystem with Discord support and comprehensive docs
 
-  [Break free from vendor lock‑in →](https://github.com/wesammustafa/OpenCode-Everything-You-Need-to-Know)
+  [Break free from vendor lock‑in →](https://github.com/wesammustafa/opencode-primer)
 
   ## 🎙️ My Content
 
