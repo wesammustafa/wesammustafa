@@ -1,0 +1,30 @@
+name: Refresh star charts
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate charts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 scripts/star_chart.py wesammustafa/Claude-Code-Everything-You-Need-to-Know assets/star-history-claude-code.svg
+          python3 scripts/star_chart.py wesammustafa/opencode-primer assets/star-history-opencode-primer.svg
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/star-history-*.svg
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh star history charts"
+            git push
+          fi
