@@ -62,7 +62,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   <div align="center">
     <a href="https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know">
-      <img src="assets/star-history-claude-code.svg" alt="Star History Chart" width="60%" />
+      <img src="https://api.star-history.com/svg?repos=wesammustafa/Claude-Code-Everything-You-Need-to-Know&type=Date" alt="Star History Chart" width="60%" />
     </a>
   </div>
 
@@ -77,7 +77,7 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   <div align="center">
     <a href="https://github.com/wesammustafa/opencode-primer">
-      <img src="assets/star-history-opencode-primer.svg" alt="Star History Chart" width="60%" />
+      <img src="https://api.star-history.com/svg?repos=wesammustafa/opencode-primer&type=Date" alt="Star History Chart" width="60%" />
     </a>
   </div>
 
