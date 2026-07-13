@@ -28,9 +28,3 @@ jobs:
             git commit -m "chore: refresh star history charts"
             git push
           fi
-      - name: TEMP graphql probe
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api graphql -f query='{ repository(owner:"wesammustafa", name:"opencode-primer") { stargazerCount stargazers(first: 3) { edges { starredAt } } } }' || true
