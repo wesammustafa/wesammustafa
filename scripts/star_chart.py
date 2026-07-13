@@ -7,6 +7,8 @@ import json
 import math
 import os
 import sys
+import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 
@@ -17,26 +19,51 @@ LINE = "#3987e5"  # passes 3:1 contrast on both light and dark surfaces
 MUTED = "#898781"
 
 
+# GraphQL, not REST: the Actions GITHUB_TOKEN gets 403 "Resource not accessible
+# by integration" on other repos' REST /stargazers, but GraphQL reads them fine.
+QUERY = """query($owner:String!,$name:String!,$cursor:String){
+  repository(owner:$owner,name:$name){
+    stargazers(first:100,after:$cursor,orderBy:{field:STARRED_AT,direction:ASC}){
+      pageInfo{hasNextPage endCursor}
+      edges{starredAt}}}}"""
+
+
+def graphql(variables, token):
+    req = urllib.request.Request(
+        f"{API}/graphql",
+        data=json.dumps({"query": QUERY, "variables": variables}).encode(),
+        headers={"Authorization": f"Bearer {token}", "User-Agent": "star-chart"},
+    )
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req) as r:
+                body = json.load(r)
+            if "errors" in body:
+                sys.exit(f"GraphQL errors: {body['errors']}")
+            return body["data"]
+        except urllib.error.HTTPError as e:
+            body = e.read().decode(errors="replace")[:500]
+            if attempt == 3 or e.code not in (403, 429, 500, 502, 503):
+                sys.exit(f"HTTP {e.code}\n{dict(e.headers)}\n{body}")
+            wait = int(e.headers.get("Retry-After") or 15 * 2**attempt)
+            print(f"HTTP {e.code}, retry in {wait}s: {body}", file=sys.stderr)
+            time.sleep(wait)
+
+
 def fetch_star_dates(repo, token):
-    dates, page = [], 1
+    owner, name = repo.split("/")
+    dates, cursor = [], None
     while True:
-        req = urllib.request.Request(
-            f"{API}/repos/{repo}/stargazers?per_page=100&page={page}",
-            headers={
-                "Accept": "application/vnd.github.star+json",
-                "Authorization": f"Bearer {token}",
-                "User-Agent": "star-chart",
-            },
-        )
-        with urllib.request.urlopen(req) as r:
-            batch = json.load(r)
+        sg = graphql({"owner": owner, "name": name, "cursor": cursor}, token)[
+            "repository"
+        ]["stargazers"]
         dates += [
-            datetime.fromisoformat(s["starred_at"].replace("Z", "+00:00"))
-            for s in batch
+            datetime.fromisoformat(e["starredAt"].replace("Z", "+00:00"))
+            for e in sg["edges"]
         ]
-        if len(batch) < 100:
+        if not sg["pageInfo"]["hasNextPage"]:
             return sorted(dates)
-        page += 1
+        cursor = sg["pageInfo"]["endCursor"]
 
 
 def nice_ticks(total):
