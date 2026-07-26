@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""Generate a cumulative star-history SVG for a GitHub repo. Stdlib only.
+"""Generate cumulative star-history SVGs for a GitHub repo. Stdlib only.
 
-Usage: GITHUB_TOKEN=... python3 scripts/star_chart.py owner/repo out.svg
+Writes a light and a dark file from one API pass; the README selects between
+them with a picture element.
+
+Usage: GITHUB_TOKEN=... python3 scripts/star_chart.py owner/repo light.svg dark.svg
 """
 import json
 import math
@@ -10,13 +13,35 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 API = "https://api.github.com"
-W, H = 800, 400
-ML, MR, MT, MB = 64, 32, 56, 44  # margins
-LINE = "#3987e5"  # passes 3:1 contrast on both light and dark surfaces
-MUTED = "#898781"
+
+# Geometry. Type is sized for the README's width="60%" (~0.67 downscale), so
+# what look like huge sizes here land at ~10-31px on the rendered page.
+W, H = 800, 424
+PAD = 12  # header gutter
+ML, MR = 76, 26  # plot left/right
+PT, PB = 144, 376  # plot top / baseline
+HERO_Y = 94  # baseline of the headline star count
+DELTA_DAYS = 30
+
+# Baked per file rather than a prefers-color-scheme media query: that query
+# reads the OS setting, which an SVG loaded as an image cannot reconcile with
+# GitHub's own theme toggle, so a reader on GitHub-dark plus OS-light got white
+# ink on a white card. The README picks the file via a picture element instead.
+# Values are the reference data-viz palette, validated by the skill's
+# validate_palette.js against GitHub's real surfaces (#ffffff and #0d1117).
+THEMES = {
+    "light": {
+        "ink": "#0b0b0b", "ink2": "#52514e", "muted": "#898781",
+        "grid": "#e1e0d9", "axis": "#c3c2b7", "series": "#2a78d6", "good": "#006300",
+    },
+    "dark": {
+        "ink": "#ffffff", "ink2": "#c3c2b7", "muted": "#898781",
+        "grid": "#2c2c2a", "axis": "#383835", "series": "#3987e5", "good": "#0ca30c",
+    },
+}
 
 
 # Needs a real PAT, not the Actions github.token: that token is scoped to this
@@ -85,10 +110,28 @@ def downsample(points, cap=240):
     return [points[round(i * (n - 1) / (cap - 1))] for i in range(cap)]
 
 
-def render(repo, dates):
+def star_path(cx, cy, r):
+    """Five-point star. A drawn path, not '⭐': SVG loaded via <img> has no
+    guaranteed emoji font, and the glyph rendered at a different size per OS."""
+    pts = []
+    for i in range(10):
+        a = -math.pi / 2 + i * math.pi / 5
+        rad = r if i % 2 == 0 else r * 0.382
+        pts.append(f"{cx + rad * math.cos(a):.1f},{cy + rad * math.sin(a):.1f}")
+    return "M" + "L".join(pts) + "Z"
+
+
+def recent_gain(dates, days=DELTA_DAYS):
+    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
+    return sum(1 for d in dates if d >= cutoff)
+
+
+def render(repo, dates, theme="light"):
+    c = THEMES[theme]
     points = downsample([(d.timestamp(), i + 1) for i, d in enumerate(dates)])
     t0, t1 = points[0][0], points[-1][0]
     total = points[-1][1]
+    gain = recent_gain(dates)
     step, ymax = nice_ticks(total)
     tspan = max(t1 - t0, 1)
 
@@ -96,21 +139,20 @@ def render(repo, dates):
         return ML + (t - t0) / tspan * (W - ML - MR)
 
     def y(v):
-        return H - MB - v / ymax * (H - MT - MB)
+        return PB - v / ymax * (PB - PT)
 
     path = " ".join(f"{x(t):.1f},{y(v):.1f}" for t, v in points)
-    area = f"{ML},{y(0):.1f} {path} {x(t1):.1f},{y(0):.1f}"
+    area = f"{ML},{PB} {path} {x(t1):.1f},{PB}"
 
     grid, yticks = [], []
-    for i in range(1, round(ymax / step) + 1):
-        v = step * i
-        gy = y(v)
-        grid.append(
-            f'<line x1="{ML}" y1="{gy:.1f}" x2="{W - MR}" y2="{gy:.1f}" '
-            f'stroke="{MUTED}" stroke-opacity=".22"/>'
-        )
+    for i in range(round(ymax / step) + 1):
+        v, gy = step * i, y(step * i)
+        if i:  # 0 gets the baseline rule below instead of a gridline
+            grid.append(
+                f'<line class="grid" x1="{ML}" y1="{gy:.1f}" x2="{W - MR}" y2="{gy:.1f}"/>'
+            )
         yticks.append(
-            f'<text x="{ML - 8}" y="{gy + 4:.1f}" text-anchor="end">{v:,.0f}</text>'
+            f'<text class="tick" x="{ML - 12}" y="{gy + 5:.1f}" text-anchor="end">{v:,.0f}</text>'
         )
 
     fmt = "%b %d" if tspan < 120 * 86400 else "%b %Y"
@@ -120,37 +162,80 @@ def render(repo, dates):
         label = datetime.fromtimestamp(t, tz=timezone.utc).strftime(fmt)
         anchor = ("start", "middle", "middle", "middle", "end")[i]
         xticks.append(
-            f'<text x="{x(t):.1f}" y="{H - MB + 20}" text-anchor="{anchor}">{label}</text>'
+            f'<text class="tick" x="{x(t):.1f}" y="{PB + 32}" text-anchor="{anchor}">{label}</text>'
         )
 
+    delta = (
+        f'<text class="delta" x="{W - PAD}" y="{HERO_Y}" text-anchor="end">'
+        f"&#8593; {gain:,} in the last {DELTA_DAYS} days</text>"
+        if gain
+        else ""
+    )
     ex, ey = x(t1), y(total)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Star history of {repo}: {total:,} stars">
+    label = f"Star history of {repo}: {total:,} stars"
+    if gain:
+        label += f", up {gain:,} in the last {DELTA_DAYS} days"
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{label}">
 <style>
-text{{font:12px system-ui,-apple-system,'Segoe UI',sans-serif;fill:{MUTED}}}
-.title{{font-size:15px;font-weight:600;fill:#52514e}}
-.count{{font-weight:600;fill:{LINE}}}
-@media (prefers-color-scheme:dark){{.title{{fill:#c3c2b7}}}}
+text{{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;fill:{c["muted"]}}}
+.repo{{font-size:18px;fill:{c["ink2"]}}}
+.hero{{font-size:46px;font-weight:600;fill:{c["ink"]};letter-spacing:-.02em}}
+.unit{{font-size:18px;fill:{c["muted"]}}}
+.delta{{font-size:16px;font-weight:500;fill:{c["good"]}}}
+.tick{{font-size:16px;font-variant-numeric:tabular-nums}}
+.grid{{stroke:{c["grid"]};stroke-width:1}}
+.axis{{stroke:{c["axis"]};stroke-width:1}}
+.mark{{fill:{c["series"]}}}
+.line{{fill:none;stroke:{c["series"]};stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}}
+.g0{{stop-color:{c["series"]};stop-opacity:.22}}
+.g1{{stop-color:{c["series"]};stop-opacity:0}}
 </style>
-<text class="title" x="{ML}" y="26">{repo} — star history</text>
+<defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" class="g0"/><stop offset="1" class="g1"/>
+</linearGradient></defs>
+<text class="repo" x="{PAD}" y="30">{repo}</text>
+<path class="mark" d="{star_path(PAD + 15, HERO_Y - 17, 15)}"/>
+<text x="{PAD + 42}" y="{HERO_Y}"><tspan class="hero">{total:,}</tspan><tspan class="unit" dx="12">stars</tspan></text>
+{delta}
 {"".join(grid)}
-<line x1="{ML}" y1="{y(0):.1f}" x2="{W - MR}" y2="{y(0):.1f}" stroke="{MUTED}" stroke-opacity=".5"/>
+<line class="axis" x1="{ML}" y1="{PB}" x2="{W - MR}" y2="{PB}"/>
 {"".join(yticks)}{"".join(xticks)}
-<polygon points="{area}" fill="{LINE}" fill-opacity=".08"/>
-<polyline points="{path}" fill="none" stroke="{LINE}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-<circle cx="{ex:.1f}" cy="{ey:.1f}" r="4" fill="{LINE}"/>
-<text class="count" x="{ex - 10:.1f}" y="{ey - 10:.1f}" text-anchor="end">{total:,} ⭐</text>
+<polygon points="{area}" fill="url(#fade)"/>
+<polyline class="line" points="{path}"/>
+<circle class="mark" cx="{ex:.1f}" cy="{ey:.1f}" r="5"/>
 </svg>
 """
 
 
 def selftest():
+    import re
+    import xml.dom.minidom
+
     assert nice_ticks(2303) == (500, 2500) and nice_ticks(343) == (100, 400)
     assert nice_ticks(9) == (2, 10) and nice_ticks(1) == (1, 1)
     pts = downsample([(i, i) for i in range(1000)])
     assert len(pts) == 240 and pts[0] == (0, 0) and pts[-1] == (999, 999)
+
     base = datetime(2025, 1, 1, tzinfo=timezone.utc)
-    svg = render("o/r", [base.replace(day=d) for d in range(1, 20)])
-    assert svg.startswith("<svg") and "19 ⭐" in svg
+    old = [base.replace(day=d) for d in range(1, 20)]
+    for theme, ink in (("light", "#0b0b0b"), ("dark", "#ffffff")):
+        svg = render("o/r", old, theme)
+        xml.dom.minidom.parseString(svg)  # well-formed, and entities escaped
+        assert f"fill:{ink}" in svg, f"{theme} did not bake its own ink"
+        assert "prefers-color-scheme" not in svg, "theme must be baked, not queried"
+        assert '<tspan class="hero">19</tspan>' in svg
+        assert "nan" not in svg.lower()
+        assert "in the last" not in svg, "2025 data must not claim a recent gain"
+
+        # Every plotted coordinate stays inside the plot box — catches layout
+        # math that renders off-canvas, which parsing alone will not.
+        for attr in re.findall(r'points="([^"]+)"', svg):
+            for pt in attr.split():
+                px, py = (float(n) for n in pt.split(","))
+                assert 0 <= px <= W and PT <= py <= PB, f"{pt} outside plot"
+
+    fresh = render("o/r", old + [datetime.now(timezone.utc) - timedelta(days=1)])
+    assert f"1 in the last {DELTA_DAYS} days" in fresh
     print("selftest OK")
 
 
@@ -158,8 +243,13 @@ if __name__ == "__main__":
     if sys.argv[1:] == ["--selftest"]:
         selftest()
         sys.exit()
-    repo, out = sys.argv[1], sys.argv[2]
+    if len(sys.argv) != 4:
+        sys.exit(f"usage: {sys.argv[0]} owner/repo out-light.svg out-dark.svg")
+    repo, out_light, out_dark = sys.argv[1:4]
+    # One fetch, both themes: paginating a few thousand stargazers twice would
+    # double the API cost for identical data.
     dates = fetch_star_dates(repo, os.environ["GITHUB_TOKEN"])
-    with open(out, "w") as f:
-        f.write(render(repo, dates))
-    print(f"{out}: {len(dates):,} stars")
+    for out, theme in ((out_light, "light"), (out_dark, "dark")):
+        with open(out, "w") as f:
+            f.write(render(repo, dates, theme))
+    print(f"{out_light} + {out_dark}: {len(dates):,} stars")
