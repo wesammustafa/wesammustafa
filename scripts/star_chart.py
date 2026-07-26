@@ -19,8 +19,12 @@ LINE = "#3987e5"  # passes 3:1 contrast on both light and dark surfaces
 MUTED = "#898781"
 
 
-# GraphQL, not REST: the Actions GITHUB_TOKEN gets 403 "Resource not accessible
-# by integration" on other repos' REST /stargazers, but GraphQL reads them fine.
+# Needs a real PAT, not the Actions github.token: that token is scoped to this
+# repo, so reading another repo's stargazers 403s "Resource not accessible by
+# integration" over both REST and GraphQL. CI passes the STAR_CHART_TOKEN secret
+# (zero-scope classic PAT; public read is enough). Anonymous is not an option:
+# /stargazers now returns 401. GraphQL over REST only because orderBy STARRED_AT
+# returns the history already sorted.
 QUERY = """query($owner:String!,$name:String!,$cursor:String){
   repository(owner:$owner,name:$name){
     stargazers(first:100,after:$cursor,orderBy:{field:STARRED_AT,direction:ASC}){
