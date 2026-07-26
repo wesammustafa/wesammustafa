@@ -62,7 +62,10 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   <div align="center">
     <a href="https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know">
-      <img src="assets/star-history-claude-code.svg" alt="Star History Chart" width="60%" />
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/star-history-claude-code-dark.svg" />
+        <img src="assets/star-history-claude-code.svg" alt="Star history of Claude-Code-Everything-You-Need-to-Know" width="60%" />
+      </picture>
     </a>
   </div>
 
@@ -77,7 +80,10 @@ My work focuses on designing distributed, integration‑heavy systems and data w
 
   <div align="center">
     <a href="https://github.com/wesammustafa/opencode-primer">
-      <img src="assets/star-history-opencode-primer.svg" alt="Star History Chart" width="60%" />
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="assets/star-history-opencode-primer-dark.svg" />
+        <img src="assets/star-history-opencode-primer.svg" alt="Star history of opencode-primer" width="60%" />
+      </picture>
     </a>
   </div>
 

@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 424" width="800" height="424" role="img" aria-label="Star history of wesammustafa/opencode-primer: 353 stars, up 61 in the last 30 days">
 <style>
 text{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;fill:#898781}
-.repo{font-size:18px;fill:#52514e}
-.hero{font-size:46px;font-weight:600;fill:#0b0b0b;letter-spacing:-.02em}
+.repo{font-size:18px;fill:#c3c2b7}
+.hero{font-size:46px;font-weight:600;fill:#ffffff;letter-spacing:-.02em}
 .unit{font-size:18px;fill:#898781}
-.delta{font-size:16px;font-weight:500;fill:#006300}
+.delta{font-size:16px;font-weight:500;fill:#0ca30c}
 .tick{font-size:16px;font-variant-numeric:tabular-nums}
-.grid{stroke:#e1e0d9;stroke-width:1}
-.axis{stroke:#c3c2b7;stroke-width:1}
-.mark{fill:#2a78d6}
-.line{fill:none;stroke:#2a78d6;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
-.g0{stop-color:#2a78d6;stop-opacity:.22}
-.g1{stop-color:#2a78d6;stop-opacity:0}
+.grid{stroke:#2c2c2a;stroke-width:1}
+.axis{stroke:#383835;stroke-width:1}
+.mark{fill:#3987e5}
+.line{fill:none;stroke:#3987e5;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}
+.g0{stop-color:#3987e5;stop-opacity:.22}
+.g1{stop-color:#3987e5;stop-opacity:0}
 </style>
 <defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
 <stop offset="0" class="g0"/><stop offset="1" class="g1"/>

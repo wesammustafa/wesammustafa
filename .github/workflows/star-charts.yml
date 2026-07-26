@@ -18,8 +18,8 @@ jobs:
           # Not github.token: it cannot read other repos' stargazers. See scripts/star_chart.py.
           GITHUB_TOKEN: ${{ secrets.STAR_CHART_TOKEN }}
         run: |
-          python3 scripts/star_chart.py wesammustafa/Claude-Code-Everything-You-Need-to-Know assets/star-history-claude-code.svg
-          python3 scripts/star_chart.py wesammustafa/opencode-primer assets/star-history-opencode-primer.svg
+          python3 scripts/star_chart.py wesammustafa/Claude-Code-Everything-You-Need-to-Know assets/star-history-claude-code.svg assets/star-history-claude-code-dark.svg
+          python3 scripts/star_chart.py wesammustafa/opencode-primer assets/star-history-opencode-primer.svg assets/star-history-opencode-primer-dark.svg
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
