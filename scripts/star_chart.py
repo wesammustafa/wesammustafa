@@ -4,7 +4,7 @@
 Writes a light and a dark file from one API pass; the README selects between
 them with a picture element.
 
-Usage: GITHUB_TOKEN=... python3 scripts/star_chart.py owner/repo light.svg dark.svg
+Usage: python3 scripts/star_chart.py owner/repo light.svg dark.svg
 """
 import json
 import math
@@ -13,9 +13,14 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
+from pathlib import Path
 
 API = "https://api.github.com"
+
+# Resolved off the script, not the CWD: a run from elsewhere would otherwise
+# see no history, start a new one, and overwrite years of data with one point.
+HISTORY = Path(__file__).resolve().parent.parent / "assets" / "star-history.json"
 
 # Geometry. Type is sized for the README's width="60%" (~0.67 downscale), so
 # what look like huge sizes here land at ~10-31px on the rendered page.
@@ -44,55 +49,53 @@ THEMES = {
 }
 
 
-# Needs a real PAT, not the Actions github.token: that token is scoped to this
-# repo, so reading another repo's stargazers 403s "Resource not accessible by
-# integration" over both REST and GraphQL. CI passes the STAR_CHART_TOKEN secret
-# (zero-scope classic PAT; public read is enough). Anonymous is not an option:
-# /stargazers now returns 401. GraphQL over REST only because orderBy STARRED_AT
-# returns the history already sorted.
-QUERY = """query($owner:String!,$name:String!,$cursor:String){
-  repository(owner:$owner,name:$name){
-    stargazers(first:100,after:$cursor,orderBy:{field:STARRED_AT,direction:ASC}){
-      pageInfo{hasNextPage endCursor}
-      edges{starredAt}}}}"""
-
-
-def graphql(variables, token):
-    req = urllib.request.Request(
-        f"{API}/graphql",
-        data=json.dumps({"query": QUERY, "variables": variables}).encode(),
-        headers={"Authorization": f"Bearer {token}", "User-Agent": "star-chart"},
-    )
+# Reads stargazers_count off the public repo record instead of paginating
+# /stargazers. That endpoint carries the starredAt history but needs auth, and
+# the Actions github.token cannot read another repo's stargazers ("Resource not
+# accessible by integration" over both REST and GraphQL), which forced a
+# hand-rolled PAT secret. PATs expire, and when this one did the daily job 401'd
+# every morning. The repo record is public, so the history is accumulated in
+# HISTORY instead: one unauthenticated request a day, nothing to rotate.
+def fetch_count(repo, token=None):
+    headers = {"User-Agent": "star-chart", "Accept": "application/vnd.github+json"}
+    if token:  # optional: only raises the 60/hr anonymous rate limit
+        headers["Authorization"] = f"Bearer {token}"
     for attempt in range(4):
+        req = urllib.request.Request(f"{API}/repos/{repo}", headers=headers)
         try:
             with urllib.request.urlopen(req) as r:
-                body = json.load(r)
-            if "errors" in body:
-                sys.exit(f"GraphQL errors: {body['errors']}")
-            return body["data"]
+                return json.load(r)["stargazers_count"]
         except urllib.error.HTTPError as e:
-            body = e.read().decode(errors="replace")[:500]
+            body = e.read().decode(errors="replace")[:300]
+            if e.code in (401, 403) and headers.pop("Authorization", None):
+                # Token absent, expired or wrongly scoped. The data is public,
+                # so this must not be fatal -- that was the original outage.
+                print(f"HTTP {e.code} with token, retrying anonymously: {body}",
+                      file=sys.stderr)
+                continue
             if attempt == 3 or e.code not in (403, 429, 500, 502, 503):
-                sys.exit(f"HTTP {e.code}\n{dict(e.headers)}\n{body}")
+                sys.exit(f"HTTP {e.code}\n{body}")
             wait = int(e.headers.get("Retry-After") or 15 * 2**attempt)
             print(f"HTTP {e.code}, retry in {wait}s: {body}", file=sys.stderr)
             time.sleep(wait)
 
 
-def fetch_star_dates(repo, token):
-    owner, name = repo.split("/")
-    dates, cursor = [], None
-    while True:
-        sg = graphql({"owner": owner, "name": name, "cursor": cursor}, token)[
-            "repository"
-        ]["stargazers"]
-        dates += [
-            datetime.fromisoformat(e["starredAt"].replace("Z", "+00:00"))
-            for e in sg["edges"]
-        ]
-        if not sg["pageInfo"]["hasNextPage"]:
-            return sorted(dates)
-        cursor = sg["pageInfo"]["endCursor"]
+def record(repo, count):
+    """Store today's count, return the whole series as (timestamp, count).
+
+    Keyed by UTC date so a re-run overwrites rather than appends: manual
+    dispatches stay idempotent.
+    """
+    history = json.loads(HISTORY.read_text()) if HISTORY.exists() else {}
+    series = history.setdefault(repo, {})
+    series[datetime.now(timezone.utc).strftime("%Y-%m-%d")] = count
+    # indent=0 keeps one day per line, so the daily commit is a one-line diff.
+    HISTORY.write_text(json.dumps(history, indent=0, sort_keys=True) + "\n")
+    return [
+        (datetime.strptime(d, "%Y-%m-%d")
+         .replace(tzinfo=timezone.utc).timestamp(), c)
+        for d, c in sorted(series.items())
+    ]
 
 
 def nice_ticks(total):
@@ -121,18 +124,24 @@ def star_path(cx, cy, r):
     return "M" + "L".join(pts) + "Z"
 
 
-def recent_gain(dates, days=DELTA_DAYS):
-    cutoff = datetime.now(timezone.utc) - timedelta(days=days)
-    return sum(1 for d in dates if d >= cutoff)
+def recent_gain(series, days=DELTA_DAYS):
+    """Growth over the trailing window, or 0 if the history is shorter than it:
+    a series that does not span the window cannot honestly label one."""
+    cutoff = datetime.now(timezone.utc).timestamp() - days * 86400
+    if series[0][0] > cutoff:
+        return 0
+    return series[-1][1] - [c for t, c in series if t <= cutoff][-1]
 
 
-def render(repo, dates, theme="light"):
+def render(repo, series, theme="light"):
     c = THEMES[theme]
-    points = downsample([(d.timestamp(), i + 1) for i, d in enumerate(dates)])
+    total = series[-1][1]
+    gain = recent_gain(series)  # off the full series; downsampling loses days
+    points = downsample(series)
     t0, t1 = points[0][0], points[-1][0]
-    total = points[-1][1]
-    gain = recent_gain(dates)
-    step, ymax = nice_ticks(total)
+    # Scaled to the peak, not the last value: unstars can dip the tail, and a
+    # ymax below an earlier peak would draw that peak outside the plot box.
+    step, ymax = nice_ticks(max(v for _, v in series))
     tspan = max(t1 - t0, 1)
 
     def x(t):
@@ -168,12 +177,12 @@ def render(repo, dates, theme="light"):
     delta = (
         f'<text class="delta" x="{W - PAD}" y="{HERO_Y}" text-anchor="end">'
         f"&#8593; {gain:,} in the last {DELTA_DAYS} days</text>"
-        if gain
+        if gain > 0  # net-negative months exist; "up -4" would be nonsense
         else ""
     )
     ex, ey = x(t1), y(total)
     label = f"Star history of {repo}: {total:,} stars"
-    if gain:
+    if gain > 0:
         label += f", up {gain:,} in the last {DELTA_DAYS} days"
     return f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="{label}">
 <style>
@@ -216,8 +225,9 @@ def selftest():
     pts = downsample([(i, i) for i in range(1000)])
     assert len(pts) == 240 and pts[0] == (0, 0) and pts[-1] == (999, 999)
 
-    base = datetime(2025, 1, 1, tzinfo=timezone.utc)
-    old = [base.replace(day=d) for d in range(1, 20)]
+    day = 86400
+    base = datetime(2025, 1, 1, tzinfo=timezone.utc).timestamp()
+    old = [(base + i * day, i + 1) for i in range(19)]
     for theme, ink in (("light", "#0b0b0b"), ("dark", "#ffffff")):
         svg = render("o/r", old, theme)
         xml.dom.minidom.parseString(svg)  # well-formed, and entities escaped
@@ -234,8 +244,19 @@ def selftest():
                 px, py = (float(n) for n in pt.split(","))
                 assert 0 <= px <= W and PT <= py <= PB, f"{pt} outside plot"
 
-    fresh = render("o/r", old + [datetime.now(timezone.utc) - timedelta(days=1)])
-    assert f"1 in the last {DELTA_DAYS} days" in fresh
+    now = datetime.now(timezone.utc).timestamp()
+    span = [(now - i * day, 100 - i) for i in range(90, -1, -1)]
+    assert recent_gain(span) == DELTA_DAYS
+    assert f"{DELTA_DAYS} in the last {DELTA_DAYS} days" in render("o/r", span)
+    # A window the history does not cover must not be labelled, and a net
+    # decline must not be rendered as growth.
+    assert recent_gain(span[-5:]) == 0
+    assert "in the last" not in render("o/r", [(now - 60 * day, 50), (now, 40)])
+
+    # An earlier peak above the final value still has to fit the plot box.
+    dip = [(now - 60 * day, 900), (now - 30 * day, 1000), (now, 700)]
+    for pt in re.findall(r'points="([^"]+)"', render("o/r", dip))[0].split():
+        assert PT <= float(pt.split(",")[1]) <= PB, f"{pt} outside plot"
     print("selftest OK")
 
 
@@ -246,10 +267,8 @@ if __name__ == "__main__":
     if len(sys.argv) != 4:
         sys.exit(f"usage: {sys.argv[0]} owner/repo out-light.svg out-dark.svg")
     repo, out_light, out_dark = sys.argv[1:4]
-    # One fetch, both themes: paginating a few thousand stargazers twice would
-    # double the API cost for identical data.
-    dates = fetch_star_dates(repo, os.environ["GITHUB_TOKEN"])
+    series = record(repo, fetch_count(repo, os.environ.get("GITHUB_TOKEN")))
     for out, theme in ((out_light, "light"), (out_dark, "dark")):
         with open(out, "w") as f:
-            f.write(render(repo, dates, theme))
-    print(f"{out_light} + {out_dark}: {len(dates):,} stars")
+            f.write(render(repo, series, theme))
+    print(f"{out_light} + {out_dark}: {series[-1][1]:,} stars, {len(series)} days")
