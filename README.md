@@ -4,7 +4,7 @@
 
 **Software Engineer** | **Forward Deployed Engineer (FDE)** | **AI Engineer** based in **Madrid, Spain** specializing in **Product & Platform Engineering**, **Distributed Systems (AWS)**, and **AI‑Enabled Systems**.
 
-I build scalable, production‑grade platforms across **E‑Commerce, PropTech, SaaS/CRM, and Cloud‑Native ecosystems**. My primary stack includes **Node.js** and **TypeScript**, with strong experience in **Java (Spring Boot)**.
+I build scalable, production‑grade platforms across **E‑Commerce, PropTech, SaaS/CRM, and Cloud‑Native ecosystems**. My primary stack includes **Node.js** and **TypeScript**, with strong experience in **Python (FastAPI)** and **Java (Spring Boot)**.
 
 My work focuses on designing distributed, integration‑heavy systems and data workflows that tie architecture decisions directly to business outcomes. This includes launching greenfield products, scaling high‑traffic platforms, and modernizing monoliths into resilient microservices.
 
