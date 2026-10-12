@@ -61,10 +61,10 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   **Claude‑Code‑Everything‑You‑Need‑to‑Know** the ultimate all‑in‑one guide to mastering Claude Code
 
   <div align="center">
-    <a href="https://github.com/wesammustafa/Claude-Code-Everything-You-Need-to-Know">
+    <a href="https://www.star-history.com/?repos=wesammustafa%2Fclaude-code-everything-you-need-to-know&amp;type=date">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="assets/star-history-claude-code-dark.svg" />
-        <img src="assets/star-history-claude-code.svg" alt="Star history of Claude-Code-Everything-You-Need-to-Know" width="60%" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=wesammustafa/claude-code-everything-you-need-to-know&amp;type=date&amp;theme=dark" />
+        <img src="https://api.star-history.com/chart?repos=wesammustafa/claude-code-everything-you-need-to-know&amp;type=date" alt="Star history of Claude-Code-Everything-You-Need-to-Know" width="60%" />
       </picture>
     </a>
   </div>
@@ -79,10 +79,10 @@ My work focuses on designing distributed, integration‑heavy systems and data w
   **opencode‑primer** - The comprehensive guide to open‑source AI coding
 
   <div align="center">
-    <a href="https://github.com/wesammustafa/opencode-primer">
+    <a href="https://www.star-history.com/?repos=wesammustafa%2Fopencode-primer&amp;type=date">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="assets/star-history-opencode-primer-dark.svg" />
-        <img src="assets/star-history-opencode-primer.svg" alt="Star history of opencode-primer" width="60%" />
+        <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=wesammustafa/opencode-primer&amp;type=date&amp;theme=dark" />
+        <img src="https://api.star-history.com/chart?repos=wesammustafa/opencode-primer&amp;type=date" alt="Star history of opencode-primer" width="60%" />
       </picture>
     </a>
   </div>
